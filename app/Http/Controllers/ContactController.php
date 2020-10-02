@@ -27,7 +27,7 @@ class ContactController extends Controller
     {
         $contacts = Contact::all();
         return view('contacts', [
-            'data' => $contacts
+            'contacts' => $contacts
         ]);
     }
 

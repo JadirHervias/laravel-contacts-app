@@ -18,7 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::resource('contacts', 'ContactController')->middleware('auth.basic');
 Route::get('contacts', [ContactController::class, 'index']);
 
 
