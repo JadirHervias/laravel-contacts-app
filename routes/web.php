@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('contacts', [ContactController::class, 'index']);
-Route::post('contacts', [ContactController::class, 'store']);
+// Route::post('contacts', [ContactController::class, 'store']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

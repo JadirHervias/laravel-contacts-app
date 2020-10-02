@@ -278,8 +278,7 @@ $(document).ready(function(){
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>
-							</th>
+							<th>#</th>
 							<th>Nombre</th>
 							<th>Email</th>
 							<th>Direcci&oacute;n</th>
@@ -288,7 +287,18 @@ $(document).ready(function(){
 						</tr>
 					</thead>
 					<tbody>
-            @forelse ($contacts as $contact)
+            <tr>
+                <td>1</td>
+                <td>Jadir Hervias</td>
+                <td>jadirhervias@gmail.com</td>
+                <td>Av. Lima 123</td>
+                <td>928341233<td>
+                <td>
+                  <a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                </td>
+              </tr>
+            <!-- @forelse ($contacts as $contact)
               <tr>
                 <td>
                 </td>
@@ -305,7 +315,7 @@ $(document).ready(function(){
               <tr class="text-center">  
                 <td>No hay contactos que mostrar</td>
               </tr>
-            @endforelse
+            @endforelse -->
 					</tbody>
 				</table>
 			</div>
@@ -405,40 +415,40 @@ $(document).ready(function(){
 	</div>
 
   <script type="text/javascript">
-        $(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        // $(function () {
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
 
-            $('#btnSave').click(function (e) {
-                e.preventDefault();
-                $(this).html('Enviando...');
-                $.ajax({
-                    data: $('#contactForm').serialize(),
-                    url: "{{ route('contacts.store') }}",
-                    type: "POST",
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        $('#contactForm').trigger("reset");
-                        const textDanger = document.querySelectorAll('.text-danger');
-                        textDanger.forEach((element) => element.textContent = '');
-                        const formControls = document.querySelectorAll('.form-control');
-                        formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
-                        document.insertAdjacentHTML('afterend', '<div id="successCrear" class="alert alert-success" role="alert">' + data.success + '</div>');
-                        $('#btnSave').html('Guardar cambios');
-                    },
-                    error: function (error) {
-                        const errorMessages = data.responseJSON;
+        //     $('#btnSave').click(function (e) {
+        //         e.preventDefault();
+        //         $(this).html('Enviando...');
+        //         $.ajax({
+        //             data: $('#contactForm').serialize(),
+        //             url: "{{ route('contacts.store') }}",
+        //             type: "POST",
+        //             dataType: 'json',
+        //             success: function (data) {
+        //                 console.log(data);
+        //                 $('#contactForm').trigger("reset");
+        //                 const textDanger = document.querySelectorAll('.text-danger');
+        //                 textDanger.forEach((element) => element.textContent = '');
+        //                 const formControls = document.querySelectorAll('.form-control');
+        //                 formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
+        //                 document.insertAdjacentHTML('afterend', '<div id="successCrear" class="alert alert-success" role="alert">' + data.success + '</div>');
+        //                 $('#btnSave').html('Guardar cambios');
+        //             },
+        //             error: function (error) {
+        //                 const errorMessages = data.responseJSON;
                         
-                        console.log(error);
-                        $('#btnSave').html('Guardar Cambios');   
-                    }
-                });
-            });
-        });
+        //                 console.log(error);
+        //                 $('#btnSave').html('Guardar Cambios');   
+        //             }
+        //         });
+        //     });
+        // });
     </script>
 </body>
 </html>
