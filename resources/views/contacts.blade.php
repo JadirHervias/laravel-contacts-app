@@ -288,14 +288,14 @@ $(document).ready(function(){
 						</tr>
 					</thead>
 					<tbody>
-            @forelse ($contact as $contacts)
+            @forelse ($contacts as $contact)
               <tr>
                 <td>
                 </td>
-                <td>$contact->name</td>
-                <td>$contact->email</td>
-                <td>$contact->address</td>
-                <td>$contact->phone_number</td>
+                <td>{{ $contact->name }}</td>
+                <td>{{ $contact->email }}</td>
+                <td>{{ $contact->address }}</td>
+                <td>{{ $contact->phone_number }}</td>
                 <td>
                   <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                   <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
