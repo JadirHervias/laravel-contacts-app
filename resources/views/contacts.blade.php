@@ -411,16 +411,7 @@ $(document).ready(function(){
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            // $('body').on('click', '.editarClase', function () {
-            //     var contactsId = $(this).data('id');
-            //     $.get("{{ route('clases.index') }}" + '/' + contactsId +'/edit', function (data) {
-            //         $('#contactId').val(data.id);
-            //         $('#contactName').val(data.name);
-            //         $('#contactEmail').val(data.email);
-            //         $('#contactAddress').val(data.address);
-            //         $('#contactPhoneNumber').val(data.phone_number);
-            //     })
-            // });
+
             $('#btnSave').click(function (e) {
                 e.preventDefault();
                 $(this).html('Enviando...');
@@ -438,11 +429,6 @@ $(document).ready(function(){
                         formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
                         document.insertAdjacentHTML('afterend', '<div id="successCrear" class="alert alert-success" role="alert">' + data.success + '</div>');
                         $('#btnSave').html('Guardar cambios');
-                        // $('#ajaxModal').modal('hide');
-                        // $('#notificacion').append('<div id="successNuevaClase" class="alert alert-success mt-5 pt-5" role="alert">' + data.success + '</div>');
-                        // window.setTimeout(function () { 
-                        //     $("#successNuevaClase").alert('close');
-                        // }, 2000);
                     },
                     error: function (error) {
                         const errorMessages = data.responseJSON;
@@ -452,34 +438,6 @@ $(document).ready(function(){
                     }
                 });
             });
-            // $('body').on('click', '.eliminarClase', function () {
-            //     var claseId = $(this).data('id')
-            //     $.get("{{ route('clases.index') }}" + '/' + claseId + '/confirmDelete', function (data) {
-            //         $('#modalHeadingEliminar').html("¿Seguro de eliminar?");
-            //         $('#btnEliminar').val("eliminar-clase");
-            //         $('#ajaxEliminarModal').modal('show');
-            //         $('#claseIdEliminar').val(data.id);
-            //         $('#profesorUserIdEliminar').val(data.profesor_user_id);
-            //         $('#salonIdEliminar').val(data.salon_id);
-            //     })
-            // });
-            // $('#btnEliminar').click(function (event) {
-            //     event.preventDefault();
-            //     $.ajax({
-            //         data: $('#eliminarClaseForm').serialize(),
-            //         url: "{{ route('clases.index') }}" + '/' + claseId,
-            //         type: "DELETE",
-            //         dataType: 'json',
-            //         success: function (data) {
-            //             $('#eliminarClaseForm').trigger("reset");
-            //             $('#ajaxEliminarModal').modal('hide');
-            //             table.draw();
-            //         },
-            //         error: function (data) {
-            //             console.log('Algo salio mal - Error:', data);
-            //         }
-            //     });
-            // });
         });
     </script>
 </body>
