@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('contacts', 'ContactController')->middleware('auth.basic');
-// Route::resource('contacts', [ContactController::class, 'index']);
+// Route::resource('contacts', 'ContactController')->middleware('auth.basic');
+Route::get('contacts', [ContactController::class, 'index']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
