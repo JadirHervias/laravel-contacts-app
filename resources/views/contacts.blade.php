@@ -297,7 +297,7 @@ $(document).ready(function(){
                 <td>{{ $contact->address }}</td>
                 <td>{{ $contact->phone_number }}</td>
                 <td>
-                  <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                  <a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                   <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                 </td>
               </tr>
@@ -315,7 +315,7 @@ $(document).ready(function(){
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form id="contactForm">
 					<div class="modal-header">						
 						<h4 class="modal-title">Agregar Contacto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -340,7 +340,7 @@ $(document).ready(function(){
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-success" value="Agregar">
+						<input id="btnSave" type="submit" class="btn btn-success" value="Agregar">
 					</div>
 				</form>
 			</div>
@@ -403,5 +403,84 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+
+  <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // $('body').on('click', '.editarClase', function () {
+            //     var contactsId = $(this).data('id');
+            //     $.get("{{ route('clases.index') }}" + '/' + contactsId +'/edit', function (data) {
+            //         $('#contactId').val(data.id);
+            //         $('#contactName').val(data.name);
+            //         $('#contactEmail').val(data.email);
+            //         $('#contactAddress').val(data.address);
+            //         $('#contactPhoneNumber').val(data.phone_number);
+            //     })
+            // });
+            $('#btnSave').click(function (e) {
+                e.preventDefault();
+                $(this).html('Enviando...');
+                $.ajax({
+                    data: $('#contactForm').serialize(),
+                    url: "{{ route('contacts.store') }}",
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $('#contactForm').trigger("reset");
+                        const textDanger = document.querySelectorAll('.text-danger');
+                        textDanger.forEach((element) => element.textContent = '');
+                        const formControls = document.querySelectorAll('.form-control');
+                        formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
+                        document.insertAdjacentHTML('afterend', '<div id="successCrear" class="alert alert-success" role="alert">' + data.success + '</div>');
+                        $('#btnSave').html('Guardar cambios');
+                        // $('#ajaxModal').modal('hide');
+                        // $('#notificacion').append('<div id="successNuevaClase" class="alert alert-success mt-5 pt-5" role="alert">' + data.success + '</div>');
+                        // window.setTimeout(function () { 
+                        //     $("#successNuevaClase").alert('close');
+                        // }, 2000);
+                    },
+                    error: function (error) {
+                        const errorMessages = data.responseJSON;
+                        
+                        console.log(error);
+                        $('#btnSave').html('Guardar Cambios');   
+                    }
+                });
+            });
+            // $('body').on('click', '.eliminarClase', function () {
+            //     var claseId = $(this).data('id')
+            //     $.get("{{ route('clases.index') }}" + '/' + claseId + '/confirmDelete', function (data) {
+            //         $('#modalHeadingEliminar').html("¿Seguro de eliminar?");
+            //         $('#btnEliminar').val("eliminar-clase");
+            //         $('#ajaxEliminarModal').modal('show');
+            //         $('#claseIdEliminar').val(data.id);
+            //         $('#profesorUserIdEliminar').val(data.profesor_user_id);
+            //         $('#salonIdEliminar').val(data.salon_id);
+            //     })
+            // });
+            // $('#btnEliminar').click(function (event) {
+            //     event.preventDefault();
+            //     $.ajax({
+            //         data: $('#eliminarClaseForm').serialize(),
+            //         url: "{{ route('clases.index') }}" + '/' + claseId,
+            //         type: "DELETE",
+            //         dataType: 'json',
+            //         success: function (data) {
+            //             $('#eliminarClaseForm').trigger("reset");
+            //             $('#ajaxEliminarModal').modal('hide');
+            //             table.draw();
+            //         },
+            //         error: function (data) {
+            //             console.log('Algo salio mal - Error:', data);
+            //         }
+            //     });
+            // });
+        });
+    </script>
 </body>
 </html>
