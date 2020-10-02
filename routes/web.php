@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth::routes();
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -27,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('contacts', 'ContactController');
+Route::resource('contacts', 'ContactController')->middleware('auth.basic');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
