@@ -414,41 +414,6 @@ $(document).ready(function(){
 		</div>
 	</div>
 
-  <script type="text/javascript">
-        // $(function () {
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         }
-        //     });
-
-        //     $('#btnSave').click(function (e) {
-        //         e.preventDefault();
-        //         $(this).html('Enviando...');
-        //         $.ajax({
-        //             data: $('#contactForm').serialize(),
-        //             url: "{{ route('contacts.store') }}",
-        //             type: "POST",
-        //             dataType: 'json',
-        //             success: function (data) {
-        //                 console.log(data);
-        //                 $('#contactForm').trigger("reset");
-        //                 const textDanger = document.querySelectorAll('.text-danger');
-        //                 textDanger.forEach((element) => element.textContent = '');
-        //                 const formControls = document.querySelectorAll('.form-control');
-        //                 formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
-        //                 document.insertAdjacentHTML('afterend', '<div id="successCrear" class="alert alert-success" role="alert">' + data.success + '</div>');
-        //                 $('#btnSave').html('Guardar cambios');
-        //             },
-        //             error: function (error) {
-        //                 const errorMessages = data.responseJSON;
-                        
-        //                 console.log(error);
-        //                 $('#btnSave').html('Guardar Cambios');   
-        //             }
-        //         });
-        //     });
-        // });
-    </script>
+  
 </body>
 </html>
