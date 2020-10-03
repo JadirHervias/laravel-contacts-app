@@ -424,14 +424,60 @@ $(document).ready(function(){
 				});
 
 				$('body').on('click', '#editContact', function () {
-						var contactId = $(this).data('id');
-						$.get("{{ route('contacts.index') }}" + '/' + contactId + '/edit', function (data) {
-								$('#contactId').val(data.id);
-								$('#contactName').val(data.name);
-								$('#contactEmail').val(data.email);
-								$('#contactAddress').val(data.address);
-								$('#contactPhoneNumber').val(data.phone_number);
-						})
+					var contactId = $(this).data('id');
+					$.post("{{ route('contacts.index') }}", function (data) {
+							$('#contactId').val(data.id);
+							$('#contactName').val(data.name);
+							$('#contactEmail').val(data.email);
+							$('#contactAddress').val(data.address);
+							$('#contactPhoneNumber').val(data.phone_number);
+					})
+				});
+
+				$('#btnSave').click(function (e) {
+					e.preventDefault();
+					$(this).html('Enviando...');
+					$.ajax({
+						data: $('#contactForm').serialize(),
+						url: "{{ route('contacts.store') }}",
+						type: "POST",
+						dataType: 'json',
+						success: function (data) {
+							$('#contactForm').trigger("reset");
+							// const textDanger = document.querySelectorAll('.text-danger');
+							// textDanger.forEach((element) => element.textContent = '');
+							// const formControls = document.querySelectorAll('.form-control');
+							// formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
+							// // document.insertAdjacentHTML('afterend', '<div id="successCrear" class="alert alert-success" role="alert">' + data.success + '</div>');
+							// // document.getElementById("successCrear").scrollIntoView();
+							// $('#btnGuardar').html('Guardar cambios');
+							// $('#ajaxModal').modal('hide');
+							// table.draw();
+							// $('#notificacion').append('<div id="successNuevaArea" class="alert alert-success" role="alert">' + data.success + '</div>');
+							// window.setTimeout(function () { 
+							// 		$("#successNuevaArea").alert('close');
+							// }, 2000);
+						},
+						error: function (error) {
+							// // Capturar los errores
+							// const errorMessages = error.responseJSON;
+							// const nombreDOM = document.getElementById("nombre");
+							// const firstErrorMessage = errorMessages.errors.nombre[0]
+							// // dirigirse al mensaje de error
+							// nombreDOM.scrollIntoView();
+							// // quitar todos los mensajes de error
+							// const errors = document.querySelectorAll('.text-danger');
+							// errors.forEach((element) => element.textContent = '');
+							// // mostrar el mensaje de error
+							// nombreDOM.insertAdjacentHTML('afterend', '<div class="text-danger">' + firstErrorMessage + '</div>');
+							// // quitar todos los form controls con borde rojo de error
+							// const formControls = document.querySelectorAll('.form-control');
+							// formControls.forEach((element) => element.classList.remove('border', 'border-danger'));
+							// // borde de rojo al form control con error
+							// nombreDOM.classList.add('border', 'border-danger');
+							// $('#btnGuardar').html('Guardar cambios');
+						}
+					});
 				});
 		});
 	</script>
