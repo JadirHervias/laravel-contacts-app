@@ -25,10 +25,20 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
-        return view('contacts', [
-            'contacts' => $contacts
-        ]);
+        $contacts = Contact::latest()->paginate(15);
+
+        return view('contacts.index', compact('contacts'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('contacts.create');
     }
 
     /**
@@ -39,22 +49,27 @@ class ContactController extends Controller
      */
     public function store(CreateContactRequest $request)
     {
-        try {
-            Contact::updateOrCreate(['id' => $request->get('contactId')], [
-                'name' => $request->get('name'),
-                'address' => $request->get('address'),
-                'email' => $request->get('email'),
-                'phone_number' => $request->get('phone_number')
-            ]);
+        // Contact::updateOrCreate(['id' => $request->get('contactId')], [
+        // 'name' => $request->get('name'),
+        // 'address' => $request->get('address'),
+        // 'email' => $request->get('email'),
+        // 'phone_number' => $request->get('phone_number')]);
 
-            return response()->json([
-                'success'=>'Contacto guardado correctamente'
-            ], 201);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error'=> $e
-            ]);
-        }
+        Contact::create($request->all());
+   
+        return redirect()->route('contacts.index')
+                        ->with('success','Contact created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Contact $contact)
+    {
+        return view('contacts.show', compact('contact'));
     }
 
     /**
@@ -63,10 +78,24 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
-        return response()->json($contact);
+        return view('contacts.edit', compact('contact'));
+    }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CreateContactRequest $request, Contact $contact)
+    {
+        $contact->update($request->all());
+  
+        return redirect()->route('contacts.index')
+                        ->with('success','Contact updated successfully');
     }
 
     /**
@@ -75,13 +104,11 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
         $contact->delete();
 
-        return response()->json([
-            'success'=>'Contacto eliminado correctamente'
-        ], 200);
+         return redirect()->route('contacts.index')
+                        ->with('success','Contact deleted successfully');
     }
 }

@@ -23,9 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 // Traditional CRUD routes
-Route::resource('contacts', ContactController::class)->shallow();
-
-// Route::get('contacts', [ContactController::class, 'index']);
-// Route::post('contacts', [ContactController::class, 'index']);
-// Route::put('contacts', [ContactController::class, 'index']);
-// Route::delete('contacts', [ContactController::class, 'index']);
+Route::resource('/contacts', ContactController::class);
