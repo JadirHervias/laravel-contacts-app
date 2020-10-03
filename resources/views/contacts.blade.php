@@ -334,19 +334,19 @@ $(document).ready(function(){
                     <div class="modal-body">					
 						<div class="form-group">
 							<label>Nombre</label>
-							<input type="text" class="form-control" required>
+							<input mame="name" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input type="email" class="form-control" required>
+							<input mame="email" type="email" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Direcci&oacute;n</label>
-							<textarea class="form-control" required></textarea>
+							<textarea mame="address" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">
 							<label>Tel&eacute;fono</label>
-							<input type="text" class="form-control" required>
+							<input mame="phone_number" type="text" class="form-control" required>
 						</div>					
 					</div>
 					<div class="modal-footer">
