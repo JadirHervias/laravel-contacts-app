@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Check all Blogs</h2>
+                <h2>Todos los contactos</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('blogs.create') }}"> Create new blogs</a>
+                <a class="btn btn-success" href="{{ route('contacts.create') }}"> Nuevo contacto</a>
             </div>
         </div>
     </div>
