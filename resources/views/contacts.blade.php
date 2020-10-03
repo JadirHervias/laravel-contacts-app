@@ -326,13 +326,13 @@ $(document).ready(function(){
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form id="contactForm">
+				<form id="contactForm" name="contactForm">
 					@csrf
 					<div class="modal-header">						
 						<h4 class="modal-title">Agregar Contacto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-                    <div class="modal-body">					
+					<div class="modal-body">					
 						<div class="form-group">
 							<label>Nombre</label>
 							<input id="name" mame="name" type="text" class="form-control" required>
@@ -427,7 +427,7 @@ $(document).ready(function(){
 
 				$('body').on('click', '#editContact', function () {
 					var contactId = $(this).data('id');
-					$.post("{{ route('contacts.index') }}", function (data) {
+					$.put("{{ route('contacts.index') }}", function (data) {
 							$('#contactId').val(data.id);
 							$('#contactName').val(data.name);
 							$('#contactEmail').val(data.email);
@@ -437,6 +437,7 @@ $(document).ready(function(){
 				});
 
 				$('#btnSave').click(function (e) {
+					document.getElementById();
 					e.preventDefault();
 					$(this).html('Enviando...');
 					$.ajax({
