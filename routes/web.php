@@ -18,11 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('contacts', [ContactController::class, 'index']);
-Route::post('contacts', [ContactController::class, 'index']);
-Route::put('contacts', [ContactController::class, 'index']);
-Route::delete('contacts', [ContactController::class, 'index']);
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+// Traditional CRUD routes
+Route::resource('contacts', ContactController::class)->shallow();
+
+// Route::get('contacts', [ContactController::class, 'index']);
+// Route::post('contacts', [ContactController::class, 'index']);
+// Route::put('contacts', [ContactController::class, 'index']);
+// Route::delete('contacts', [ContactController::class, 'index']);

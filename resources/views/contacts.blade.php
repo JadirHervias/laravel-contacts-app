@@ -307,8 +307,8 @@ $(document).ready(function(){
                 <td>{{ $contact->address }}</td>
                 <td>{{ $contact->phone_number }}</td>
                 <td>
-                  <a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+                  <a id="editContact" data-id="{{ $contact->id }}" href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                  <a id="deleteContact" data-id="{{ $contact->id }}" href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                 </td>
               </tr>
             @empty
@@ -366,27 +366,28 @@ $(document).ready(function(){
 						<h4 class="modal-title">Editar Contacto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">
+						<input type="hidden" name="contactId" id="contactId" />
 						<div class="form-group">
 							<label>Nombre</label>
-							<input type="text" class="form-control" required>
+							<input id="contactName" type="text" class="form-control" required />
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input type="email" class="form-control" required>
+							<input id="contactEmail" type="email" class="form-control" required />
 						</div>
 						<div class="form-group">
-							<label>Dirección</label>
-							<textarea class="form-control" required></textarea>
+							<label>Direcci&oacute;n</label>
+							<input id="contactAddress" type="text" class="form-control" required />
 						</div>
 						<div class="form-group">
 							<label>Tel&eacute;fono</label>
-							<input type="text" class="form-control" required>
+							<input id="contactPhoneNumber" type="text" class="form-control" required />
 						</div>					
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-info" value="Guardar">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar" />
+						<input type="submit" class="btn btn-info" value="Guardar" />
 					</div>
 				</form>
 			</div>
@@ -415,15 +416,25 @@ $(document).ready(function(){
 	</div>
 
 	<script type="text/javascript">
-    $(function () {
-				$.print("ajax requests")
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-</script>
+		$(function () {
+				$.ajaxSetup({
+						headers: {
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+				});
+
+				$('body').on('click', '#editContact', function () {
+						var contactId = $(this).data('id');
+						$.get("{{ route('contacts.index') }}" + '/' + contactId + '/edit', function (data) {
+								$('#contactId').val(data.id);
+								$('#contactName').val(data.name);
+								$('#contactEmail').val(data.email);
+								$('#contactAddress').val(data.address);
+								$('#contactPhoneNumber').val(data.phone_number);
+						})
+				});
+		});
+	</script>
 
 </body>
 </html>
