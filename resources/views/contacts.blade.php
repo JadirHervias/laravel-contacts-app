@@ -439,7 +439,7 @@ $(document).ready(function(){
 					e.preventDefault();
 					$(this).html('Enviando...');
 					$.ajax({
-						data: $('#contactForm').serialize(),,
+						data: $('#contactForm').serialize(),
 						headers: {
 								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 						},
