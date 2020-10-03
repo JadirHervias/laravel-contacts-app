@@ -29,25 +29,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" name="title" class="form-control" placeholder="Title">
+                <input type="text" name="name" class="form-control" placeholder="nombre">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>
-                <input type="text" name="title" class="form-control" placeholder="Title">
+                <input type="text" name="email" class="form-control" placeholder="email">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Direcci&oacute;n:</strong>
-                <input type="text" name="title" class="form-control" placeholder="Title">
+                <input type="text" name="address" class="form-control" placeholder="direccion">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tel&eacute;fono:</strong>
-                <textarea class="form-control" style="height:280px" name="description" placeholder="Description"></textarea>
+                <input type="text" name="phone_number" class="form-control" placeholder="telefono">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
