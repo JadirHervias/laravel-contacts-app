@@ -40,7 +40,7 @@ class ContactController extends Controller
     public function store(CreateContactRequest $request)
     {
         try {
-            Contact::updateOrCreate(['id' => $request->get('id')], [
+            Contact::updateOrCreate(['id' => $request->get('contactId')], [
                 'name' => $request->get('name'),
                 'address' => $request->get('address'),
                 'email' => $request->get('email'),
