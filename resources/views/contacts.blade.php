@@ -418,11 +418,11 @@ $(document).ready(function(){
 
 	<script type="text/javascript">
 		$(function () {
-				$.ajaxSetup({
-						headers: {
-								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-				});
+				// $.ajaxSetup({
+				// 		headers: {
+				// 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				// 		}
+				// });
 
 				$('body').on('click', '#editContact', function () {
 					var contactId = $(this).data('id');
@@ -439,11 +439,15 @@ $(document).ready(function(){
 					e.preventDefault();
 					$(this).html('Enviando...');
 					$.ajax({
-						data: $('#contactForm').serialize(),
+						data: $('#contactForm').serialize(),,
+						headers: {
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
 						url: "{{ route('contacts.store') }}",
 						type: "POST",
 						dataType: 'json',
 						success: function (data) {
+							console.log(data)
 							$('#contactForm').trigger("reset");
 							// const textDanger = document.querySelectorAll('.text-danger');
 							// textDanger.forEach((element) => element.textContent = '');
@@ -460,6 +464,9 @@ $(document).ready(function(){
 							// }, 2000);
 						},
 						error: function (error) {
+
+							console.log(error)
+
 							// // Capturar los errores
 							// const errorMessages = error.responseJSON;
 							// const nombreDOM = document.getElementById("nombre");
