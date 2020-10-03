@@ -13,11 +13,6 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contacts')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'address' => Str::random(10),
-            'phone_number' => '927433221',
-        ]);
+        // User::factory(10)->create();
     }
 }
