@@ -19,7 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('contacts', [ContactController::class, 'index']);
-// Route::post('contacts', [ContactController::class, 'store']);
+Route::post('contacts', [ContactController::class, 'index']);
+Route::put('contacts', [ContactController::class, 'index']);
+Route::delete('contacts', [ContactController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

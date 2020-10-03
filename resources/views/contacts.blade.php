@@ -235,7 +235,7 @@
 		font-weight: normal;
 	}	
 </style>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
 	// Activate tooltip
 	$('[data-toggle="tooltip"]').tooltip();
@@ -287,18 +287,18 @@ $(document).ready(function(){
 						</tr>
 					</thead>
 					<tbody>
-            <tr>
-                <td>1</td>
-                <td>Jadir Hervias</td>
-                <td>jadirhervias@gmail.com</td>
-                <td>Av. Lima 123</td>
-                <td>928341233<td>
-                <td>
-                  <a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                  <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
-                </td>
-              </tr>
-            <!-- @forelse ($contacts as $contact)
+            <!-- <tr>
+							<td>1</td>
+							<td>Jadir Hervias</td>
+							<td>jadirhervias@gmail.com</td>
+							<td>Av. Lima 123</td>
+							<td>928341233<td>
+							<td>
+								<a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+							</td>
+						</tr> -->
+            @forelse ($contacts as $contact)
               <tr>
                 <td>
                 </td>
@@ -315,7 +315,7 @@ $(document).ready(function(){
               <tr class="text-center">  
                 <td>No hay contactos que mostrar</td>
               </tr>
-            @endforelse -->
+            @endforelse
 					</tbody>
 				</table>
 			</div>
@@ -414,6 +414,16 @@ $(document).ready(function(){
 		</div>
 	</div>
 
-  
+	<script type="text/javascript">
+    $(function () {
+				$.print("ajax requests")
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
