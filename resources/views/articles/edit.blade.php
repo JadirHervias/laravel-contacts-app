@@ -7,7 +7,7 @@
                 <h2>Editar art&iacute;culo</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('articles.list') }}"> Atr&aacute;s</a>
+                <a class="btn btn-primary" href="{{ route('articles.index') }}"> Atr&aacute;s</a>
             </div>
         </div>
     </div>
