@@ -21,11 +21,25 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::latest()->paginate(15);
+
+        if ($request) {
+            $description = $request->get('description');
+            $cost = $request->get('cost');
+            $stock = $request->get('stock');
+
+            $articles = Article::orderBy('id', 'ASC')
+                ->description($description)
+                ->cost($cost)
+                ->stock($stock)
+                ->paginate(15);
+        } else {
+            $articles = Article::latest()->paginate(15);
+        }
 
         return view('articles.index', compact('articles'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -69,7 +83,7 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $contact
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
     public function edit(Article $article)
@@ -81,7 +95,7 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $contact
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
     public function update(CreateArticleRequest $request, Article $article)
@@ -95,7 +109,7 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $contact
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
     public function destroy(Article $article)

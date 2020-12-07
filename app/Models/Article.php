@@ -16,4 +16,20 @@ class Article extends Model
         'cost',
         'stock'
     ];
+
+    // Query Scopes
+    public function scopeDescription($query, $description) {
+        if ($description)
+            return $query->orwhere('description', 'LIKE', "%$description%");
+    }
+
+    public function scopeCost($query, $cost) {
+        if ($cost)
+            return $query->orwhere('cost', 'LIKE', "%$cost%");
+    }
+
+    public function scopeStock($query, $stock) {
+        if ($stock)
+            return $query->orwhere('stock', 'LIKE', "%$stock%");
+    }
 }

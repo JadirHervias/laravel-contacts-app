@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Crear nuevo art&iacute;culos</h2>
+            <h2>Crear nuevo art&iacute;culo</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('articles.index') }}"> Atr&aacute;s</a>

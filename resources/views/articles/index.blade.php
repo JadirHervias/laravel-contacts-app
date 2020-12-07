@@ -34,10 +34,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Todos los contactos</h2>
+                <h2>Todos los art&iacute;culos</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('articles.create') }}"> Nuevo contacto</a>
+                <a class="btn btn-success" href="{{ route('articles.create') }}"> Nuevo art&iacute;culo</a>
             </div>
         </div>
     </div>
