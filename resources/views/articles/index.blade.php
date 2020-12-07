@@ -2,7 +2,7 @@
  
 @section('content')
 
-    <div class="row">
+    <div class="row py-3">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Buscar art&iacute;culo</h2>
@@ -22,8 +22,8 @@
                 </div>
 
                 <div class='form-group'>
-                    <button type="submit" class="btn btn-dafault">
-                        <span class="glyphicon glyphicon-search"></span>
+                    <button type="submit" class="btn btn-success">
+                        Buscar
                     </button>
                 </div>
                 {{ Form::close() }}
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row py-3">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Todos los art&iacute;culos</h2>
