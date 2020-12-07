@@ -19,7 +19,7 @@ class Article extends Model
 
     // Query Scopes
 
-    public function scopeIdn($query, $id) {
+    public function scopeId($query, $id) {
         if ($id)
             return $query->orwhere('id', 'LIKE', "%$id%");
     }
