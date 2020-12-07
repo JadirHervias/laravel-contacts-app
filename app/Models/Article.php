@@ -18,6 +18,12 @@ class Article extends Model
     ];
 
     // Query Scopes
+
+    public function scopeIdn($query, $id) {
+        if ($id)
+            return $query->orwhere('id', 'LIKE', "%$id%");
+    }
+
     public function scopeDescription($query, $description) {
         if ($description)
             return $query->orwhere('description', 'LIKE', "%$description%");

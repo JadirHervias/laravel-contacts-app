@@ -9,6 +9,11 @@
             </div>
             <div class="pull-right">
                 {{ Form::open(['route' => 'articles.index', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
+
+                <div class='form-group'>
+                    {{ Form::text('id', null, ['class' => 'form-control', 'placeholder' => 'Codigo']) }}
+                </div>
+
                 <div class='form-group'>
                     {{ Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Desc']) }}
                 </div>

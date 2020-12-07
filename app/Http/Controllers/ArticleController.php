@@ -28,11 +28,13 @@ class ArticleController extends Controller
     {
 
         if ($request) {
+            $id = $request->get('id');
             $description = $request->get('description');
             $cost = $request->get('cost');
             $stock = $request->get('stock');
 
             $articles = Article::orderBy('id', 'ASC')
+                ->id($id)
                 ->description($description)
                 ->cost($cost)
                 ->stock($stock)
