@@ -14,11 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Contact::factory()->times(1)->create([
-            "name" => "Jadir Hervias",
-            "email" => "jadirhervias@gmail.com",
-            "address" => "Av. Proceres 123",
-            "phone_number" => "911246644"
-        ]);
+       
     }
 }

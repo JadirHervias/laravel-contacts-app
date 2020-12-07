@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateContactRequest extends FormRequest
+class CreateArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,27 +24,22 @@ class CreateContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:150',
-            'address' => 'required|min:2|max:150',
-            'email' => 'required|email:rfc,dns',
-            'phone_number' => 'required'
+            'description' => 'required|string',
+            'cost' => 'required|numeric',
+            'stock' => 'required|integer',
         ];
     }
 
     public function messages(){
         return [
-            'name.required' => 'Por favor, ingrese el nombre',
-            'name.min' => 'Se permiten 2 caracteres como mínimo',
-            'name.max' => 'Ha sobrepasado el límite de 150 caracteres',
+            'description.required' => 'Por favor, ingrese la sescripcion',
+            'description.string' => 'Descripcion incorrecta',
 
-            'address.required' => 'Por favor, ingrese el address',
-            'address.min' => 'Se permiten 2 caracteres como mínimo',
-            'address.max' => 'Ha sobrepasado el límite de 150 caracteres',
+            'cost.required' => 'Por favor, ingrese el costo',
+            'cost.numeric' => 'Costo dede ser un valor numerico',
 
-            'email.required' => 'Por favor, ingrese el email',
-            'email.email' => 'Ingrese un email valido',
-
-            'phone_number.required' => 'Por favor, ingrese el telefono',
+            'stock.required' => 'Por favor, ingrese el stock',
+            'stock.integer' => 'Stock debe ser un entero',
         ];
     }
 }
