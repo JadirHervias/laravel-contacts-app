@@ -27,7 +27,15 @@
                     @auth
                         <a href="{{ url('/articles') }}" class="text-sm text-gray-700 underline">Art&iacute;culos</a>
 
-                        <a href="{{ route('logout') }}" class="text-right text-sm text-gray-700 underline">Salir</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-jet-dropdown-link href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                {{ __('Salir') }}
+                            </x-jet-dropdown-link>
+                        </form>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
 
