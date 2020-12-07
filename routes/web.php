@@ -25,6 +25,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 // Traditional CRUD routes
 Route::resource('/articles', ArticleController::class, [
     'names' => [
-        'index' => 'articles',
+        'index' => 'list',
     ]
 ]);

@@ -8,7 +8,7 @@
                 <h2>Buscar art&iacute;culo</h2>
             </div>
             <div class="pull-right">
-                {{ Form::open(['route' => 'articles', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
+                {{ Form::open(['route' => 'list', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
                 <div class='form-group'>
                     {{ Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Desc']) }}
                 </div>
