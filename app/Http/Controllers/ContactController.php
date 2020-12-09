@@ -15,15 +15,16 @@ class ContactController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
       if ($request) {
@@ -33,7 +34,7 @@ class ContactController extends Controller
           $address = $request->get('address');
           $phoneNumber = $request->get('phone_number');
 
-          $articles = Contact::orderBy('id', 'ASC')
+          $contacts = Contact::orderBy('id', 'ASC')
               ->id($id)
               ->name($name)
               ->email($email)
@@ -41,7 +42,7 @@ class ContactController extends Controller
               ->phoneNumber($phoneNumber)
               ->paginate(15);
       } else {
-          $articles = Contact::latest()->paginate(15);
+          $contacts = Contact::latest()->paginate(15);
       }
 
       return view('contacts.index', compact('contacts'))

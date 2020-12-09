@@ -1,13 +1,19 @@
 @extends('contacts.layout')
-  
+
+@section('breadcrumbs')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('contacts.index') }}">Atr&aacute;s</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Crear contacto</li>
+        </ol>
+    </nav>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Crear nuevo contacto</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('contacts.index') }}"> Atr&aacute;s</a>
         </div>
     </div>
 </div>
