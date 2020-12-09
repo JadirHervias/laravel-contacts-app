@@ -1,12 +1,12 @@
-@extends('articles.layout')
+@extends('contacts.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Art&iacute;culo</h2>
+                <h2>Contacto</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-dark" href="{{ route('articles.index') }}"> Atr&aacute;s</a>
+                <a class="btn btn-primary" href="{{ route('contacts.index') }}"> Atr&aacute;s</a>
             </div>
         </div>
     </div>
@@ -14,20 +14,26 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Descripci&oacute;n:</strong>
-                {{ $article->description }}
+                <strong>Nombre:</strong>
+                {{ $contact->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Costo:</strong>
-                {{ $article->cost }}
+                <strong>Email:</strong>
+                {{ $contact->email }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Stock:</strong>
-                {{ $article->stock }}
+                <strong>Direcci&oacute;n:</strong>
+                {{ $contact->address }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Tel&eacute;fono:</strong>
+                {{ $contact->phone_number }}
             </div>
         </div>
     </div>

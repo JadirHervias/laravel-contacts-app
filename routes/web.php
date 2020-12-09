@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 // Traditional CRUD routes
-Route::resource('/articles', ArticleController::class);
-// ,[
-//     'names' => [
-//         'index' => 'articles',
-//     ]
-// ]);
+Route::resource('/contacts', ContactController::class);

@@ -1,13 +1,13 @@
-@extends('articles.layout')
+@extends('contacts.layout')
   
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Crear nuevo art&iacute;culo</h2>
+            <h2>Crear nuevo contacto</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-dark" href="{{ route('articles.index') }}"> Atr&aacute;s</a>
+            <a class="btn btn-primary" href="{{ route('contacts.index') }}"> Atr&aacute;s</a>
         </div>
     </div>
 </div>
@@ -23,29 +23,35 @@
     </div>
 @endif
    
-<form action="{{ route('articles.store') }}" method="POST">
+<form action="{{ route('contacts.store') }}" method="POST">
     @csrf
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Descripci&oacute;n:</strong>
-                <input type="text" name="description" class="form-control" placeholder="Desc">
+                <strong>Nombre:</strong>
+                <input type="text" name="name" class="form-control" placeholder="nombre">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Costo:</strong>
-                <input type="number" name="cost" class="form-control" placeholder="Costo">
+                <strong>Email:</strong>
+                <input type="text" name="email" class="form-control" placeholder="email">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Stock:</strong>
-                <input type="number" name="stock" class="form-control" placeholder="Stock">
+                <strong>Direcci&oacute;n:</strong>
+                <input type="text" name="address" class="form-control" placeholder="direccion">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Tel&eacute;fono:</strong>
+                <input type="text" name="phone_number" class="form-control" placeholder="telefono">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-          <button type="submit" class="btn btn-success">Crear</button>
+          <button type="submit" class="btn btn-primary">Crear</button>
         </div>
     </div>
    

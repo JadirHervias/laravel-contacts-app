@@ -1,29 +1,33 @@
-@extends('articles.layout')
+@extends('contacts.layout')
  
 @section('content')
 
     <div class="row py-3">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Buscar art&iacute;culo</h2>
+                <h2>Buscar contactos</h2>
             </div>
             <div class="pull-right">
-                {{ Form::open(['route' => 'articles.index', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
+                {{ Form::open(['route' => 'contacts.index', 'method' => 'GET', 'class' => 'form-inline pull-right']) }}
 
                 <div class='form-group'>
                     {{ Form::text('id', null, ['class' => 'form-control', 'placeholder' => 'Codigo']) }}
                 </div>
 
                 <div class='form-group'>
-                    {{ Form::text('description', null, ['class' => 'form-control', 'placeholder' => 'Desc']) }}
+                    {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre']) }}
                 </div>
 
                 <div class='form-group'>
-                    {{ Form::text('cost', null, ['class' => 'form-control', 'placeholder' => 'Costo']) }}
+                    {{ Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
                 </div>
 
                 <div class='form-group'>
-                    {{ Form::text('stock', null, ['class' => 'form-control', 'placeholder' => 'Stock']) }}
+                    {{ Form::text('address', null, ['class' => 'form-control', 'placeholder' => 'Direccion']) }}
+                </div>
+
+                <div class='form-group'>
+                    {{ Form::text('phone_number', null, ['class' => 'form-control', 'placeholder' => 'Tel.']) }}
                 </div>
 
                 <div class='form-group'>
@@ -39,10 +43,10 @@
     <div class="row py-3">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Todos los art&iacute;culos</h2>
+                <h2>Lista de contactos</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('articles.create') }}"> Nuevo art&iacute;culo</a>
+                <a class="btn btn-success" href="{{ route('contacts.create') }}"> Nuevo contacto</a>
             </div>
         </div>
     </div>
@@ -56,23 +60,26 @@
     <table class="table table-bordered">
         <tr>
             <th>#</th>
-            <th>Descripci&oacute;n</th>
-            <th>Costo</th>
-            <th>Stock</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Direcci&oacute;n</th>
+            <th>Tel&eacute;fono</th>
             <th width="250px">Action</th>
         </tr>
-        @foreach ($articles as $article)
+        @foreach ($contacts as $contact)
         <tr>
-            <td>{{ ++$i }}</td>
-            <td>{{ $article->description }}</td>
-            <td>{{ $article->cost }}</td>
-            <td>{{ $article->stock }}</td>
+            <!-- <td>{{ ++$i }}</td> -->
+            <td>{{ $contact->id }}</td>
+            <td>{{ $contact->name }}</td>
+            <td>{{ $contact->email }}</td>
+            <td>{{ $contact->address }}</td>
+            <td>{{ $contact->phone_number }}</td>
             <td>
-                <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
+                <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('articles.show',$article->id) }}">Ver</a>
+                    <a class="btn btn-info" href="{{ route('contacts.show', $contact->id) }}">Ver</a>
     
-                    <a class="btn btn-primary" href="{{ route('articles.edit',$article->id) }}">Editar</a>
+                    <a class="btn btn-primary" href="{{ route('contacts.edit', $contact->id) }}">Editar</a>
    
                     @csrf
                     @method('DELETE')
@@ -84,6 +91,6 @@
         @endforeach
     </table>
   
-    {!! $articles->links() !!}
+    {!! $contacts->links() !!}
       
 @endsection
