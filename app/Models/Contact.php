@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\User;
+// use App\Models\User;
 
 class Contact extends Model
 {
@@ -15,11 +17,18 @@ class Contact extends Model
         'name',
         'email',
         'address',
-        'phone_number'
+        'photo_url',
+        'phone_number',
+        'owner_id'
     ];
 
-    // Query Scopes
+    // Relations
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    // Query Scopes
     public function scopeId($query, $id) {
         if ($id)
             return $query->orwhere('id', 'LIKE', "%$id%");

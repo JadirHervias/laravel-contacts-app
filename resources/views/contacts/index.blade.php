@@ -60,7 +60,8 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th>#</th>
+                <th>C&oacute;digo</th>
+                <th>Foto</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Direcci&oacute;n</th>
@@ -73,6 +74,8 @@
             <tr scope="row">
                 <!-- <td>{{ ++$i }}</td> -->
                 <td>{{ $contact->id }}</td>
+                <!-- <td>https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}</td> -->
+                <td>https://hervias-contacts-app.s3.us-west-2.amazonaws.com</td>
                 <td>{{ $contact->name }}</td>
                 <td>{{ $contact->email }}</td>
                 <td>{{ $contact->address }}</td>

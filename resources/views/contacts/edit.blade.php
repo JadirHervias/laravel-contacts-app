@@ -29,7 +29,7 @@
         </div>
     @endif
   
-    <form action="{{ route('contacts.update',$contact->id) }}" method="POST">
+    <form action="{{ route('contacts.update',$contact->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
    
@@ -43,23 +43,31 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Email:</strong>
-                    <input type="text" name="email" value="{{ $contact->email }}" class="form-control" placeholder="email">
+                    <input type="text" name="email" value="{{ $contact->email }}" class="form-control" placeholder="Email">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Direccion:</strong>
-                    <input type="text" name="address" value="{{ $contact->address }}" class="form-control" placeholder="Direccion">
+                    <strong>Direcci&oacute;n:</strong>
+                    <input type="text" name="address" value="{{ $contact->address }}" class="form-control" placeholder="Direcci&oacute;n">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Telefono:</strong>
-                    <input type="text" name="phone_number" value="{{ $contact->phone_number }}" class="form-control" placeholder="Telefono">
+                    <strong>Tel&eacute;fono:</strong>
+                    <input type="text" name="phone_number" value="{{ $contact->phone_number }}" class="form-control" placeholder="Tel&eacute;fono">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Actualizar</button>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <strong>Foto de contacto:</strong>
+                <div class="custom-file">
+                    <input type="file" name="photo" class="custom-file-input" id="photo">
+                    <label class="custom-file-label text-muted" for="chooseFile">Elegir imagen</label>
+                </div>
+            </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
             </div>
         </div>
    

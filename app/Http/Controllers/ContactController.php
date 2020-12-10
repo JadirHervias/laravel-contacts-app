@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Http\Requests\CreateContactRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Cached\Storage\Memcached;
 
 class ContactController extends Controller
 {
@@ -27,6 +31,8 @@ class ContactController extends Controller
     public function index(Request $request)
     {
 
+      $currentUser = Auth::user()->id;
+
       if ($request) {
           $id = $request->get('id');
           $name = $request->get('name');
@@ -34,7 +40,8 @@ class ContactController extends Controller
           $address = $request->get('address');
           $phoneNumber = $request->get('phone_number');
 
-          $contacts = Contact::orderBy('id', 'ASC')
+          $contacts = Contact::orderBy('created_at', 'DESC')
+              // ->where('owner_id', '=', $currentUser)
               ->id($id)
               ->name($name)
               ->email($email)
@@ -42,7 +49,7 @@ class ContactController extends Controller
               ->phoneNumber($phoneNumber)
               ->paginate(15);
       } else {
-          $contacts = Contact::latest()->paginate(15);
+          $contacts = Contact::where('owner_id', '=', $currentUser)->paginate(15);
       }
 
       return view('contacts.index', compact('contacts'))
@@ -67,16 +74,22 @@ class ContactController extends Controller
      */
     public function store(CreateContactRequest $request)
     {
-        // Contact::updateOrCreate(['id' => $request->get('contactId')], [
-        // 'name' => $request->get('name'),
-        // 'address' => $request->get('address'),
-        // 'email' => $request->get('email'),
-        // 'phone_number' => $request->get('phone_number')]);
+        $currentUser = Auth::user()->id;
 
-        Contact::create($request->all());
-    
-        return redirect()->route('contacts.index')
-                        ->with('success','Contact created successfully.');
+        $photoUrl = $request->file('photo')->store('contact-profiles', 's3');
+
+        $contact = Contact::create([
+            'name' => $request->get('name'),
+            'address' => $request->get('address'),
+            'email' => $request->get('email'),
+            'photo_url' => $photoUrl,
+            'phone_number' => $request->get('phone_number'),
+            'owner_id' => $currentUser
+        ]);
+
+        return redirect()
+            ->route('contacts.index')
+            ->with('success', 'Contact created successfully.');
     }
 
     /**
@@ -112,8 +125,9 @@ class ContactController extends Controller
     {
         $contact->update($request->all());
 
-        return redirect()->route('contacts.index')
-                        ->with('success','Contact updated successfully');
+        return redirect()
+            ->route('contacts.index')
+            ->with('success','Contact updated successfully');
     }
 
     /**
@@ -126,7 +140,8 @@ class ContactController extends Controller
     {
         $contact->delete();
 
-          return redirect()->route('contacts.index')
-                        ->with('success','Contact deleted successfully');
+        return redirect()
+            ->route('contacts.index')
+            ->with('success','Contact deleted successfully');
     }
 }

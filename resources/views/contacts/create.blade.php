@@ -29,35 +29,44 @@
     </div>
 @endif
    
-<form action="{{ route('contacts.store') }}" method="POST">
+<form action="{{ route('contacts.store') }}" enctype="multipart/form-data" method="POST">
     @csrf
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" name="name" class="form-control" placeholder="nombre">
+                <input type="text" name="name" class="form-control" placeholder="Nombre">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>
-                <input type="text" name="email" class="form-control" placeholder="email">
+                <input type="text" name="email" class="form-control" placeholder="Email">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Direcci&oacute;n:</strong>
-                <input type="text" name="address" class="form-control" placeholder="direccion">
+                <input type="text" name="address" class="form-control" placeholder="Direcci&oacute;n">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tel&eacute;fono:</strong>
-                <input type="text" name="phone_number" class="form-control" placeholder="telefono">
+                <input type="text" name="phone_number" class="form-control" placeholder="Tel&eacute;fono">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-          <button type="submit" class="btn btn-primary">Crear</button>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <strong>Foto de contacto:</strong>
+            <div class="custom-file">
+                <input type="file" name="photo" class="custom-file-input" id="photo" onchange="previewPhoto(this)">
+                <label class="custom-file-label text-muted" for="chooseFile">Elegir imagen</label>
+                <span class="help-block text-danger">{{$errors->first('photo')}}</span>
+                <img id="previewPhoto" alt="Profile image" style="max-width:130px;margin-top:20px;">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center my-5">
+          <button type="submit" class="btn btn-lg btn-primary">Crear</button>
         </div>
     </div>
    

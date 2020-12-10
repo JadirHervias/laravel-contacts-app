@@ -18,6 +18,7 @@ class CreateContactsTable extends Migration
             $table->string("name");
             $table->string("email")->unique();
             $table->string("address");
+            $table->string("photo_url")->default('not found');
             $table->string("phone_number");
             $table->timestamps();
         });
