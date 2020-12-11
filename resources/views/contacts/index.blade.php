@@ -57,46 +57,56 @@
         </div>
     @endif
    
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>C&oacute;digo</th>
-                <th>Foto</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Direcci&oacute;n</th>
-                <th>Tel&eacute;fono</th>
-                <th width="250px">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($contacts as $contact)
-            <tr scope="row">
-                <!-- <td>{{ ++$i }}</td> -->
-                <td>{{ $contact->id }}</td>
-                <!-- <td>https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}</td> -->
-                <td>https://hervias-contacts-app.s3.us-west-2.amazonaws.com</td>
-                <td>{{ $contact->name }}</td>
-                <td>{{ $contact->email }}</td>
-                <td>{{ $contact->address }}</td>
-                <td>{{ $contact->phone_number }}</td>
-                <td>
-                    <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
-    
-                        <a class="btn btn-dark" href="{{ route('contacts.show', $contact->id) }}">Ver</a>
-        
-                        <a class="btn btn-primary" href="{{ route('contacts.edit', $contact->id) }}">Editar</a>
-    
-                        @csrf
-                        @method('DELETE')
-        
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>C&oacute;digo</th>
+                    <th colspan="2">Nombre</th>
+                    <th>Email</th>
+                    <th>Direcci&oacute;n</th>
+                    <th>Tel&eacute;fono</th>
+                    <th width="250px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($contacts as $contact)
+                    <tr scope="row ">
+                        <!-- <td>{{ ++$i }}</td> -->
+                        <td class="align-middle">{{ $contact->id }}</td>
+                        <td class="align-middle">
+                            @if ($contact->photo_url == "not found")
+                                <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="{{ $contact->email }}" class="rounded-circle" width="70" height="70"/>
+                            @else
+                                <img src="https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}" alt="{{ $contact->email }}" class="rounded-circle" width="70" height="70"/>
+                            @endif
+                        </td>
+                        <td class="align-middle">{{ $contact->name }}</td>
+                        <td class="align-middle">{{ $contact->email }}</td>
+                        <td class="align-middle">{{ $contact->address }}</td>
+                        <td class="align-middle">{{ $contact->phone_number }}</td>
+                        <td class="align-middle">
+                            <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
+            
+                                <a class="btn btn-dark" href="{{ route('contacts.show', $contact->id) }}">Ver</a>
+                
+                                <a class="btn btn-primary" href="{{ route('contacts.edit', $contact->id) }}">Editar</a>
+            
+                                @csrf
+                                @method('DELETE')
+                
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <div class="alert alert-warning" role="alert">
+                        No se encontraron contactos
+                    </div>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
   
     {!! $contacts->links() !!}
       

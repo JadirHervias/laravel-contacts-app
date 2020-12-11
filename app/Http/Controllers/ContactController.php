@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Http\Requests\CreateContactRequest;
+use App\Http\Requests\UpdateContactRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -48,6 +49,7 @@ class ContactController extends Controller
               ->address($address)
               ->phoneNumber($phoneNumber)
               ->paginate(15);
+            
       } else {
           $contacts = Contact::where('owner_id', '=', $currentUser)->paginate(15);
       }
@@ -76,7 +78,10 @@ class ContactController extends Controller
     {
         $currentUser = Auth::user()->id;
 
-        $photoUrl = $request->file('photo')->store('contact-profiles', 's3');
+        // 'store' is private
+        $photoUrl = $request->file('photo')->storePublicly('contact-profiles', 's3');
+
+        // Storage::setVisibility($photoUrl, 'public');
 
         $contact = Contact::create([
             'name' => $request->get('name'),
@@ -121,9 +126,27 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateContactRequest $request, Contact $contact)
+    public function update(UpdateContactRequest $request, Contact $contact)
     {
-        $contact->update($request->all());
+
+        $validRequest = array_filter($request->all(), function ($item) {
+            if ($item != null) {
+                return $item;
+            }
+        });
+
+        if ($request->hasFile('photo')) {
+            Storage::disk('s3')->delete($contact->photo_url);
+            $newPhotoUrl = $request->file('photo')->storePublicly('contact-profiles', 's3');
+            $contact->update([
+                'photo_url' => $newPhotoUrl,
+            ]);
+
+            $contact->update($validRequest);
+
+        } else {
+            $contact->update($validRequest);
+        }
 
         return redirect()
             ->route('contacts.index')
@@ -138,6 +161,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        Storage::disk('s3')->delete($contact->photo_url);
         $contact->delete();
 
         return redirect()

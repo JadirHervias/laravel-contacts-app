@@ -29,7 +29,7 @@
         </div>
     @endif
   
-    <form action="{{ route('contacts.update',$contact->id) }}" enctype="multipart/form-data" method="POST">
+    <form action="{{ route('contacts.update', $contact->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
    
@@ -60,16 +60,20 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <strong>Foto de contacto:</strong>
-                <div class="custom-file">
+                @if ($contact->photo_url == "not found")
+                    <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="{{ $contact->email }}" class="rounded-circle" width="150" height="150"/>
+                @else
+                    <img src="https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}" alt="{{ $contact->email }}" class="rounded-circle" width="150" height="150"/>
+                @endif
+                <div class="custom-file my-4">
                     <input type="file" name="photo" class="custom-file-input" id="photo">
-                    <label class="custom-file-label text-muted" for="chooseFile">Elegir imagen</label>
+                    <label class="custom-file-label text-muted" for="chooseFile">Elegir nueva foto</label>
                 </div>
             </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-lg btn-primary">Actualizar</button>
             </div>
         </div>
-   
+
     </form>
 @endsection

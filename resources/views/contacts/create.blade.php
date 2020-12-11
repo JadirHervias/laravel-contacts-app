@@ -59,8 +59,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <strong>Foto de contacto:</strong>
             <div class="custom-file">
-                <input type="file" name="photo" class="custom-file-input" id="photo" onchange="previewPhoto(this)">
-                <label class="custom-file-label text-muted" for="chooseFile">Elegir imagen</label>
+                <input type="file" name="photo" class="custom-file-input" id="photo"">
+                <label class="custom-file-label text-muted" for="chooseFile">Elegir foto</label>
                 <span class="help-block text-danger">{{$errors->first('photo')}}</span>
                 <img id="previewPhoto" alt="Profile image" style="max-width:130px;margin-top:20px;">
             </div>
