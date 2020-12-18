@@ -34,8 +34,14 @@
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Nombre">
+                <strong>Nombres:</strong>
+                <input type="text" name="name" class="form-control" placeholder="Nombres">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Apellidos:</strong>
+                <input type="text" name="last_name" class="form-control" placeholder="Apellidos">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -54,6 +60,12 @@
             <div class="form-group">
                 <strong>Tel&eacute;fono:</strong>
                 <input type="text" name="phone_number" class="form-control" placeholder="Tel&eacute;fono">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Fecha de nacimiento:</strong>
+                <input type="date" name="birth_date" max="3000-12-31" min="1000-01-01" class="form-control">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

@@ -19,6 +19,10 @@
                 </div>
 
                 <div class='form-group m-2'>
+                    {{ Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Apellido']) }}
+                </div>
+
+                <div class='form-group m-2'>
                     {{ Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
                 </div>
 
@@ -62,10 +66,12 @@
             <thead class="thead-dark">
                 <tr>
                     <th>C&oacute;digo</th>
-                    <th colspan="2">Nombre</th>
+                    <th colspan="2">Nombres</th>
+                    <th>Apellidos</th>
                     <th>Email</th>
                     <th>Direcci&oacute;n</th>
                     <th>Tel&eacute;fono</th>
+                    <th>Fecha Nac.</th>
                     <th width="250px">Action</th>
                 </tr>
             </thead>
@@ -78,13 +84,15 @@
                             @if ($contact->photo_url == "not found")
                                 <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="{{ $contact->email }}" class="rounded-circle" width="70" height="70"/>
                             @else
-                                <img src="https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}" alt="{{ $contact->email }}" class="rounded-circle" width="70" height="70"/>
+                                <img src="https://hervias-contacts-app.s3.us-east-1.amazonaws.com/{{ $contact->photo_url }}" alt="{{ $contact->email }}" class="rounded-circle" width="70" height="70"/>
                             @endif
                         </td>
                         <td class="align-middle">{{ $contact->name }}</td>
+                        <td class="align-middle">{{ $contact->last_name }}</td>
                         <td class="align-middle">{{ $contact->email }}</td>
                         <td class="align-middle">{{ $contact->address }}</td>
                         <td class="align-middle">{{ $contact->phone_number }}</td>
+                        <td class="align-middle">{{ $contact->birth_date }}</td>
                         <td class="align-middle">
                             <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST">
             

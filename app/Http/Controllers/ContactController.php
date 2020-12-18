@@ -37,17 +37,19 @@ class ContactController extends Controller
       if ($request) {
           $id = $request->get('id');
           $name = $request->get('name');
+          $lastName = $request->get('last_name');
           $email = $request->get('email');
           $address = $request->get('address');
           $phoneNumber = $request->get('phone_number');
 
           $contacts = Contact::orderBy('created_at', 'DESC')
-              // ->where('owner_id', '=', $currentUser)
               ->id($id)
               ->name($name)
+              ->lastName($lastName)
               ->email($email)
               ->address($address)
               ->phoneNumber($phoneNumber)
+              ->ownerId($currentUser)
               ->paginate(15);
             
       } else {
@@ -76,6 +78,7 @@ class ContactController extends Controller
      */
     public function store(CreateContactRequest $request)
     {
+
         $currentUser = Auth::user()->id;
 
         // 'store' is private
@@ -85,9 +88,11 @@ class ContactController extends Controller
 
         $contact = Contact::create([
             'name' => $request->get('name'),
+            'last_name' => $request->get('last_name'),
             'address' => $request->get('address'),
             'email' => $request->get('email'),
             'photo_url' => $photoUrl,
+            'birth_date' => $request->get('birth_date'),
             'phone_number' => $request->get('phone_number'),
             'owner_id' => $currentUser
         ]);

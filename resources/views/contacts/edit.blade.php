@@ -36,8 +36,14 @@
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Nombre:</strong>
-                    <input type="text" name="name" value="{{ $contact->name }}" class="form-control" placeholder="Nombre">
+                    <strong>Nombres:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="Nombres">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Apellidos:</strong>
+                    <input type="text" name="last_name" class="form-control" placeholder="Apellidos">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -59,11 +65,17 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Fecha de nacimiento:</strong>
+                    <input type="date" name="birth_date" max="3000-12-31" min="1000-01-01" class="form-control">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <strong>Foto de contacto:</strong>
                 @if ($contact->photo_url == "not found")
                     <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="{{ $contact->email }}" class="rounded-circle" width="150" height="150"/>
                 @else
-                    <img src="https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}" alt="{{ $contact->email }}" class="rounded-circle" width="150" height="150"/>
+                    <img src="https://hervias-contacts-app.s3.us-east-1.amazonaws.com/{{ $contact->photo_url }}" alt="{{ $contact->email }}" class="rounded-circle" width="150" height="150"/>
                 @endif
                 <div class="custom-file my-4">
                     <input type="file" name="photo" class="custom-file-input" id="photo">

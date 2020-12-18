@@ -15,10 +15,12 @@ class Contact extends Model
 
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'address',
         'photo_url',
         'phone_number',
+        'birth_date',
         'owner_id'
     ];
 
@@ -39,6 +41,11 @@ class Contact extends Model
             return $query->orwhere('name', 'LIKE', "%$name%");
     }
 
+    public function scopeLastName($query, $lastName) {
+        if ($lastName)
+            return $query->orwhere('last_name', 'LIKE', "%$lastName%");
+    }
+
     public function scopeEmail($query, $email) {
         if ($email)
             return $query->orwhere('email', 'LIKE', "%$email%");
@@ -52,5 +59,10 @@ class Contact extends Model
     public function scopePhoneNumber($query, $phoneNumber) {
         if ($phoneNumber)
             return $query->orwhere('phone_number', 'LIKE', "%$phoneNumber%");
+    }
+
+    public function scopeOwnerId($query, $ownerId) {
+        if ($ownerId)
+            return $query->where('owner_id', 'LIKE', "%$ownerId%");
     }
 }

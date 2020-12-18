@@ -27,11 +27,14 @@
                 @if ($contact->photo_url == "not found")
                     <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" class="card-img-top" alt="{{ $contact->email }}">
                 @else
-                    <img src="https://hervias-contacts-app.s3.us-west-2.amazonaws.com/{{ $contact->photo_url }}" class="card-img-top" alt="{{ $contact->email }}">
+                    <img src="https://hervias-contacts-app.s3.us-east-1.amazonaws.com/{{ $contact->photo_url }}" class="card-img-top" alt="{{ $contact->email }}">
                 @endif
                 <div class="card-body">
                     <p class="card-text">
                         <strong>Nombre: </strong>{{ $contact->name }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Nombre: </strong>{{ $contact->last_name }}
                     </p>
                     <p class="card-text">
                         <strong>Email: </strong>{{ $contact->email }}
@@ -41,6 +44,9 @@
                     </p>
                     <p class="card-text">
                         <strong>Tel&eacute;fono: </strong>{{ $contact->phone_number }}
+                    </p>
+                    <p class="card-text">
+                        <strong>Fecha de nacimiento: </strong>{{ $contact->birth_date }}
                     </p>
                 </div>
             </>
